@@ -2,8 +2,8 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { ref, computed, watch, onMounted } from 'vue';
 
-const TYPE_ICONS = { email: '📧', sms: '💬', order_fix: '🔧', analysis: '📊', integration: '🔌', other: '📝' };
-const TYPE_COLORS = { email: '#3b82f6', sms: '#10b981', order_fix: '#f59e0b', analysis: '#8b5cf6', integration: '#ec4899', other: '#6b7280' };
+const TYPE_ICONS = { deployment: '🚀', feature: '✨', bugfix: '🐛', order_fix: '🔧', analysis: '📊', integration: '🔌', documentation: '📄', agent_ops: '🤖', email: '📧', sms: '💬', other: '📝' };
+const TYPE_COLORS = { deployment: '#22c55e', feature: '#8b5cf6', bugfix: '#ef4444', order_fix: '#f59e0b', analysis: '#3b82f6', integration: '#ec4899', documentation: '#64748b', agent_ops: '#13b6ec', email: '#6366f1', sms: '#10b981', other: '#6b7280' };
 const TYPES = Object.keys(TYPE_ICONS);
 
 const logs = ref([]);
