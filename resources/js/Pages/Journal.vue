@@ -23,8 +23,9 @@ async function fetchEntries() {
   try {
     const res = await fetch('/api/tasks?board=journal', { credentials: 'same-origin' });
     const json = await res.json();
-    if (json.success) {
-      entries.value = json.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    {
+      const items = Array.isArray(json) ? json : json.data || [];
+      entries.value = items.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     }
   } catch (e) {
     console.error('Failed to fetch journal entries:', e);
@@ -92,7 +93,7 @@ async function createEntry() {
       }),
     });
     const json = await res.json();
-    if (json.success || json.data) {
+    if (json.success || json.data || json.id) {
       newTitle.value = '';
       newDescription.value = '';
       newTags.value = '';

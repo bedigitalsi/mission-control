@@ -46,7 +46,7 @@ async function fetchProjects() {
   try {
     const r = await fetch('/api/projects', { credentials: 'same-origin' });
     const json = await r.json();
-    projects.value = json.data || [];
+    projects.value = Array.isArray(json) ? json : json.data || [];
   } catch (e) { console.error(e); }
   loading.value = false;
 }

@@ -64,7 +64,7 @@ async function api(method, url, body = null) {
 async function fetchTasks() {
   try {
     const res = await api('GET', '/api/tasks?board=tasks');
-    tasks.value = (res.data || []).sort((a, b) => (a.position ?? 999) - (b.position ?? 999));
+    tasks.value = (Array.isArray(res) ? res : res.data || []).sort((a, b) => (a.position ?? 999) - (b.position ?? 999));
   } catch (e) {
     console.error('Failed to fetch tasks:', e);
   } finally {
@@ -128,7 +128,7 @@ async function createTask() {
     if (!payload.assigned_to) delete payload.assigned_to;
     if (!payload.project) delete payload.project;
     const res = await api('POST', '/api/tasks', payload);
-    if (res.data) tasks.value.push(res.data);
+    const newTask = res.data || res; if (newTask.id) tasks.value.push(newTask);
     else await fetchTasks();
     closeCreateModal();
   } catch (e) {
@@ -149,7 +149,7 @@ async function updateTask() {
     if (!payload.due_date) delete payload.due_date;
     const res = await api('PUT', `/api/tasks/${payload.id}`, payload);
     const idx = tasks.value.findIndex(t => t.id === payload.id);
-    if (idx !== -1) tasks.value[idx] = res.data || { ...tasks.value[idx], ...payload };
+    if (idx !== -1) tasks.value[idx] = res.data || res || { ...tasks.value[idx], ...payload };
     selectedTask.value = tasks.value[idx] || selectedTask.value;
   } catch (e) {
     console.error('Update failed:', e);

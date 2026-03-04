@@ -16,4 +16,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/brain', fn() => Inertia::render('Brain'))->name('brain');
     Route::get('/routines', fn() => Inertia::render('Routines'))->name('routines');
     Route::get('/projects', fn() => Inertia::render('Projects'))->name('projects');
+    Route::get('/sms', fn() => Inertia::render('Sms'))->name('sms');
+    Route::get('/organisation', fn() => Inertia::render('Organisation'))->name('organisation');
 });

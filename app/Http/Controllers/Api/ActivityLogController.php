@@ -10,9 +10,26 @@ class ActivityLogController extends Controller
 {
     public function index(Request $request)
     {
-        return ActivityLog::orderByDesc('created_at')
-            ->limit($request->get('limit', 50))
-            ->get();
+        $query = ActivityLog::orderByDesc('created_at');
+
+        if ($request->has('type') && $request->type) {
+            $query->where('type', $request->type);
+        }
+        if ($request->has('date') && $request->date) {
+            $query->whereDate('created_at', $request->date);
+        }
+
+        $paginated = $query->paginate($request->get('limit', 50));
+
+        return response()->json([
+            'success' => true,
+            'data' => $paginated->items(),
+            'meta' => [
+                'current_page' => $paginated->currentPage(),
+                'last_page' => $paginated->lastPage(),
+                'total' => $paginated->total(),
+            ],
+        ]);
     }
 
     public function store(Request $request)
@@ -25,6 +42,6 @@ class ActivityLogController extends Controller
             'metadata' => 'nullable|array',
         ]));
 
-        return response()->json($log, 201);
+        return response()->json(['success' => true, 'data' => $log], 201);
     }
 }

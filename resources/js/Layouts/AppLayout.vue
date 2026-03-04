@@ -15,6 +15,8 @@ const navItems = [
     { name: 'Brain', href: '/brain', icon: 'psychology' },
     { name: 'Routines', href: '/routines', icon: 'schedule' },
     { name: 'Projects', href: '/projects', icon: 'folder' },
+    { name: 'SMS', href: '/sms', icon: 'sms' },
+    { name: 'Organisation', href: '/organisation', icon: 'account_tree' },
 ];
 
 onMounted(() => {

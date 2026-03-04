@@ -188,7 +188,9 @@ onMounted(() => fetchLogs(1));
                   <span class="text-sm font-medium text-white truncate">{{ log.title }}</span>
                   <span class="shrink-0 px-2 py-0.5 rounded-full text-[10px] font-medium text-white/80"
                     :style="{ background: TYPE_COLORS[log.type] + '40' }">
-                    {{ log.type?.replace('_', ' ') }}
+                    {{ log.type?.replace('_', ' ') }}</span>
+                  <span v-if="log.agent" class="shrink-0 px-2 py-0.5 rounded-full text-[10px] font-medium" :class="log.agent === 'alex' ? 'bg-blue-500/30 text-blue-300' : log.agent === 'brandon' ? 'bg-amber-500/30 text-amber-300' : log.agent === 'sarah' ? 'bg-pink-500/30 text-pink-300' : 'bg-gray-500/30 text-gray-300'">
+                    {{ log.agent }}
                   </span>
                 </div>
                 <span class="text-xs text-white/40 shrink-0 whitespace-nowrap">{{ relativeTime(log.created_at) }}</span>

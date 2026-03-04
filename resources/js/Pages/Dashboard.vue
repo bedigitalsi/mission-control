@@ -58,7 +58,7 @@ const fetchJSON = async (url) => {
   try {
     const r = await fetch(url, { credentials: 'same-origin' });
     const j = await r.json();
-    return j.success ? j.data : [];
+    return Array.isArray(j) ? j : j.data || [];
   } catch { return []; }
 };
 

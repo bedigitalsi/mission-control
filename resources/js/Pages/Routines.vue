@@ -10,7 +10,7 @@ async function fetchRoutines() {
   try {
     const res = await fetch('/api/scheduled-routines', { credentials: 'same-origin' });
     const json = await res.json();
-    if (json.success) routines.value = json.data;
+    routines.value = Array.isArray(json) ? json : json.data || [];
   } catch (e) {
     error.value = 'Failed to load routines';
   } finally {

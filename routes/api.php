@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ActivityLogController;
 use App\Http\Controllers\Api\ScheduledRoutineController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\BrainController;
+use App\Http\Controllers\Api\SmsController;
 use App\Http\Middleware\ApiAuth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +31,8 @@ Route::middleware(ApiAuth::class)->group(function () {
     Route::post('/brain', [BrainController::class, 'store']);
     Route::put('/brain/{brain}', [BrainController::class, 'update']);
     Route::delete('/brain/{brain}', [BrainController::class, 'destroy']);
+
+    Route::get('/sms/stats', [SmsController::class, 'stats']);
+    Route::get('/sms', [SmsController::class, 'index']);
+    Route::post('/sms', [SmsController::class, 'store']);
 });
