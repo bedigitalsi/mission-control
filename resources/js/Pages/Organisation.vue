@@ -238,18 +238,18 @@ function flowLabel(type) {
 
       <!-- Communication Flows -->
       <div class="rounded-2xl border dark:border-dark-border bg-white dark:bg-dark-card p-6 shadow-lg">
-        <h2 class="text-xl font-bold mb-6">🔗 Communication Flows</h2>
+        <h2 class="text-xl font-bold mb-6 text-gray-900 dark:text-white">🔗 Communication Flows</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div
             v-for="flow in commFlows"
             :key="flow.from + flow.to"
-            class="flex items-center gap-4 rounded-xl border p-4 transition-colors"
+            class="flex items-center gap-4 rounded-xl border p-4 transition-colors bg-gray-50 dark:bg-dark-bg/60"
             :style="{ borderColor: flowColor(flow.type) + '40' }"
             :class="'dark:bg-dark-bg/50 bg-gray-50 hover:bg-gray-100 dark:hover:bg-white/5'"
           >
             <span class="text-2xl flex-shrink-0">{{ flow.emoji }}</span>
             <div>
-              <div class="font-semibold text-sm">{{ flow.from }} → {{ flow.to }}</div>
+              <div class="font-semibold text-sm text-gray-900 dark:text-white">{{ flow.from }} → {{ flow.to }}</div>
               <div class="text-xs text-gray-500 dark:text-gray-400">{{ flow.desc }}</div>
               <span class="inline-flex items-center mt-1 px-2 py-0.5 rounded-full text-[10px] font-medium" :style="{ background: flowColor(flow.type) + '20', color: flowColor(flow.type) }">
                 {{ flowLabel(flow.type) }}

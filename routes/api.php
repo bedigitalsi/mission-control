@@ -35,4 +35,14 @@ Route::middleware(ApiAuth::class)->group(function () {
     Route::get('/sms/stats', [SmsController::class, 'stats']);
     Route::get('/sms', [SmsController::class, 'index']);
     Route::post('/sms', [SmsController::class, 'store']);
+
+});
+
+use App\Http\Controllers\Api\AgentMessageController;
+
+Route::middleware(ApiAuth::class)->group(function () {
+    Route::get("/agent-messages", [AgentMessageController::class, "index"]);
+    Route::post("/agent-messages", [AgentMessageController::class, "store"]);
+    Route::post("/agent-messages/{id}/read", [AgentMessageController::class, "markRead"]);
+    Route::post("/agent-messages/{id}/reply", [AgentMessageController::class, "reply"]);
 });
