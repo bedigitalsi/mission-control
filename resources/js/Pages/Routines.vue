@@ -137,7 +137,7 @@ async function toggleActive(routine) {
             <!-- Header -->
             <div class="flex items-start justify-between gap-3 mb-2">
               <div class="min-w-0">
-                <h3 class="text-white font-semibold truncate">{{ r.name }}</h3>
+                <div class="flex items-center gap-2"><h3 class="text-white font-semibold truncate">{{ r.title || r.name }}</h3><span v-if="r.assigned_to" class="text-[10px] px-1.5 py-0.5 rounded bg-white/10 text-gray-400 shrink-0">{{ r.assigned_to }}</span></div>
                 <p v-if="r.description" class="text-gray-400 text-sm mt-0.5 line-clamp-2">{{ r.description }}</p>
               </div>
 
@@ -157,7 +157,7 @@ async function toggleActive(routine) {
             <!-- Schedule -->
             <div class="flex items-center gap-1.5 text-xs text-gray-400 mb-3">
               <span>🕐</span>
-              <span>{{ cronToHuman(r.schedule) }}</span>
+              <span>{{ r.frequency || r.schedule_time || "No schedule" }}</span>
             </div>
 
             <!-- Footer -->
